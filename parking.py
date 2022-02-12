@@ -128,7 +128,7 @@ if __name__ == '__main__':
                 print("Colour")
                 for details in car_details:
                     print(details.get("color"))
-        if "registration_numbers_for_cars_with_colour" in cmd:
+        if "registration_numbers_for_cars_with_colour " in cmd:
             try:
                 _, color = cmd.split(" ")
             except ValueError as e:
@@ -139,10 +139,32 @@ if __name__ == '__main__':
             if "No cars parked" in car_details:
                 print(car_details)
                 continue
+            Found = False
             for details in car_details:
                 if details.get("color") == color.lower():
+                    Found = True
                     print(details.get("reg_number"))
-        if "slot_number_for_registration_number" in cmd:
+            if not Found:
+                print("Not found")
+        if "slot_numbers_for_cars_with_colour " in cmd:
+            try:
+                _, color = cmd.split(" ")
+            except ValueError as e:
+                print("Wrong command format, please try with correct command")
+                continue
+
+            car_details = car_parking.get_car_details()
+            if "No cars parked" in car_details:
+                print(car_details)
+                continue
+            Found = False
+            for details in car_details:
+                if details.get("color") == color.lower():
+                    Found = True
+                    print(details.get("slot"))
+            if not Found:
+                print("Not found")
+        if "slot_number_for_registration_number " in cmd:
             try:
                 _, reg_number = cmd.split(" ")
             except ValueError as e:
